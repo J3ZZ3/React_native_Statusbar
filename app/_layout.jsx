@@ -8,16 +8,33 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
-  ImageBackground
+  ImageBackground,
+  Alert,
+  ToastAndroid
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
 export default function RootLayout() {
+
+  const handlePress = () => {
+    Alert.alert(
+      'Alert', 'Button Pressed',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+        {text: 'Cancel', style: 'cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Delete', style: 'destructive', onPress: () => console.log('Delete Pressed')},
+      ]
+  )}
+
+  const handleLongPress = () => {
+    ToastAndroid.show('User Long Pressed Button', 5000);
+  }
   return (
     <SafeAreaView style={styles.container}>
         <ImageBackground
-        style={{ width: "100%", height: "100%", resizeMode: "cover" }} 
+        resizeMode="cover"
+        style={{ width: "100%", height: "100%"  }} 
         onLoadStart={() => console.log("Loading")}
         onLoadEnd={() => console.log("Loaded")}
         source={{uri:"https://i.pinimg.com/736x/59/54/61/59546197baae43e5cd4612bbe1d4424d.jpg" }}>
@@ -38,71 +55,8 @@ placeholder="Last Name"
 placeholderTextColor={"white"}  
 onChangeText={(text) => {console.log(text)}}/>
 </View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Age" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Phone Number" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Email" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Password" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Confirm Password" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="House No." 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Street Name" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="City" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
-<View style={styles.form}>
-<TextInput 
-style={styles.input} 
-placeholder="Province" 
-placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
-</View>
 <Pressable style={styles.button}>
-  <Text style={styles.buttonText}>Press Here</Text>
+  <Text style={styles.buttonText} onPress={handlePress} onLongPress={handleLongPress}>Press Here</Text>
 </Pressable>
 <StatusBar backgroundColor="#010789" style='light'/>
 </ScrollView>
