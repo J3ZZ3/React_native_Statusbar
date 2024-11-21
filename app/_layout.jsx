@@ -14,8 +14,21 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import * as NavigatorBar from "expo-navigation-bar";
 
 export default function RootLayout() {
+
+  const [firstName, setFirstName] = useState('');
+
+  useEffect(() => {
+    console.log(firstName);
+  }, [firstName]);
+
+  useEffect(() => {
+    NavigatorBar.setBackgroundColorAsync("#010789");
+    NavigatorBar.setBorderColorAsync("#BDBDBD");
+  }, []);
 
   const handlePress = () => {
     Alert.alert(
@@ -46,7 +59,7 @@ export default function RootLayout() {
 style={styles.input} 
 placeholder="First Name" 
 placeholderTextColor={"white"}  
-onChangeText={(text) => {console.log(text)}}/>
+onChangeText={(text) => setFirstName(text)}/>
 </View>
 <View style={styles.form}>
 <TextInput 
@@ -60,9 +73,11 @@ onChangeText={(text) => {console.log(text)}}/>
 </Pressable>
 <StatusBar backgroundColor="#010789" style='light'/>
 </ScrollView>
+
 </ImageBackground>
-      <StatusBar backgroundColor="#010789" style="light" />
+
     </SafeAreaView>
+    
 
   );
 }
