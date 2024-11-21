@@ -16,6 +16,7 @@ import {
   import { StatusBar } from "expo-status-bar";
   import { useEffect, useState } from "react";
   import * as NavigatorBar from "expo-navigation-bar";
+  import CustomInput from "./CustomInput";
   
   export default function Registration() {
   
@@ -43,13 +44,16 @@ import {
   
     const handlePress = () => {
       Alert.alert(
+        
         'Alert', 'Button Pressed',
         [
           {text: 'OK', onPress: () => console.log('OK Pressed')},
           {text: 'Cancel', style: 'cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
           {text: 'Delete', style: 'destructive', onPress: () => console.log('Delete Pressed')},
         ]
-    )}
+    )
+  console.log(alert);
+  }
   
     const handleLongPress = () => {
       ToastAndroid.show('User Long Pressed Button', 5000);
@@ -64,42 +68,11 @@ import {
           source={{uri:"https://i.pinimg.com/736x/59/54/61/59546197baae43e5cd4612bbe1d4424d.jpg" }}>
   <ScrollView contentContainerStyle={styles.ScrollView}>
   
-  <Text style={styles.title}>Form</Text>
-  <View style={styles.form}>
-  <TextInput 
-  style={styles.input} 
-  placeholder="First Name" 
-  placeholderTextColor={"white"}  
-  onChangeText={(text) => {setFirstName(text)}}/>
-  </View>
-  <View style={styles.form}>
-  <TextInput 
-  style={styles.input} 
-  placeholder="Last Name" 
-  placeholderTextColor={"white"}  
-  onChangeText={(text) => {setLastName(text)}}/>
-  </View>
-  <View style={styles.form}>
-  <TextInput 
-  style={styles.input} 
-  placeholder="Email" 
-  placeholderTextColor={"white"}  
-  onChangeText={(text) => {setEmail(text)}}/>
-  </View>
-  <View style={styles.form}>
-  <TextInput 
-  style={styles.input} 
-  placeholder="Password" 
-  placeholderTextColor={"white"}  
-  onChangeText={(text) => {setPassword(text)}}/>
-  </View>
-  <View style={styles.form}>
-  <TextInput 
-  style={styles.input} 
-  placeholder="Confirm Password" 
-  placeholderTextColor={"white"}  
-  onChangeText={(text) => {setConfirmPassword(text)}}/>
-  </View>
+  <CustomInput name={'FirstName'} onChange={setFirstName}/>
+        <CustomInput name={'LastName'} onChange={setLastName}/>
+        <CustomInput name={'Email'} onChange={setEmail}/>
+        <CustomInput name={'Password'} onChange={setPassword}/>
+        <CustomInput name={'ConfirmPassword'} onChange={setConfirmPassword}/>
   <Pressable style={styles.button}>
     <Text style={styles.buttonText} onPress={handlePress} onLongPress={handleLongPress}>Press Here</Text>
   </Pressable>
