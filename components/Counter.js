@@ -1,4 +1,4 @@
-import { Component, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import { StyleSheet, View, Pressable, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -6,13 +6,26 @@ export default function Counter() {
     
     const [counter, setCounter] = useState(0)
 
+
+    useEffect(() => {
+        console.log();
+        return() => {
+            console.log('hi');
+            
+        }
+    },[])
+
+    useEffect(() => {
+        console.log('placememt:', counter);
+        
+    },[counter])
+
     const handleIncrement = () => {
         setCounter(state => state += 1)
     }
 
     const handleDecrement = () => {
         setCounter(state => state -= 1)
-
     }
 
 
@@ -24,7 +37,7 @@ export default function Counter() {
                 Minus
               </Text>
             </Pressable>
-            <Text style={styles.counterText}>{state.counter}</Text>
+            <Text style={styles.counterText}>{counter}</Text>
             <Pressable style={styles.button}>
               <Text style={styles.buttonText} onPress={handleIncrement}>
                 Add
