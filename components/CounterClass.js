@@ -18,11 +18,20 @@ super()
 
     handleIncrement() {
         this.setState(state => state.counter += 1)
+        this.setState(state => state.counter += 1)
+        this.setState(state => state.counter += 1)
+        this.setState(state => state.counter += 1)
+
 
     }
 
+
     handleDecrement() {
         this.setState(state => state.counter -= 1)
+        this.setState(state => state.counter -= 1)
+        this.setState(state => state.counter -= 1)
+        this.setState(state => state.counter -= 1)
+
     }
 
     handleConditional() {
@@ -51,12 +60,17 @@ super()
               </Text>
             </Pressable>
     </View>
-    {this.state.counter > 0 ? (
-      <Text style={{color: 'green'}}>Positive</Text>)
-    :this.state.counter < 0 ? (
-      <Text style={{color: 'red'}}>Negative</Text>)
-     : (<Text style={{color: 'white'}}>Zero/Neutral</Text>)
-     }
+    {
+      this.state.counter > 0 && (
+        <Text style={{color: 'green'}}>Positive</Text>
+      )
+    }
+    {
+      this.state.counter < 0 && (
+        <Text style={{color: 'red'}}>Negative</Text>
+      )
+    }
+     
     
 </SafeAreaView>
         )
