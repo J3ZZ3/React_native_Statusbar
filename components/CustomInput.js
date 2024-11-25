@@ -1,15 +1,20 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 
-const CustomInput = ({name, onChange}) => {
+const CustomInput = ({name, onChange, error = 'Invalid Input'}) => {
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
-      <TextInput style={styles.input} 
+      <TextInput style={[styles.input, error && {borderColor: '#89382C'}]} 
       placeholder={name} 
       placeholderTextColor={'#717171'}
       onChangeText={(text) => {onChange(text)}}/>
+      {
+        error && (
+          <Text style={styles.error}>Invalid Input</Text>
+        )
+      }
     </View>
   )
 }
@@ -35,4 +40,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 10,
       },
+      error: {
+        color: 'black',
+        marginHorizontal: 10,
+        marginVertical: 10
+      }
 })
