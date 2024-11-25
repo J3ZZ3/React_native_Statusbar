@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ImageBackground, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native-web";
+import Counter from '../components/Counter'
 
 export default function RootLayout() {
 
@@ -23,8 +24,8 @@ export default function RootLayout() {
   // },[firstName, lastName, email, password, confirmPassword])
 
   return (
-        <Login />
-        // <CounterClass /> 
+        // <Login />
+        <CounterClass /> 
 
   );
 }

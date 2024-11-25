@@ -44,6 +44,7 @@ export default function Counter() {
               </Text>
             </Pressable>
     </View>
+    
 </SafeAreaView>
         )
     }
