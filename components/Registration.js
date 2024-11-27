@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import * as NavigatorBar from "expo-navigation-bar";
 import CustomInput from "./CustomInput";
 import validateInput from "../utils/inputValid";
+import { RadioButton, RadioGroup } from "./RadioButton";
 
 export default function Registration() {
   const [fullName, setFullName] = useState("");
@@ -25,6 +26,7 @@ export default function Registration() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [selectedValue, setSelectedValue] = useState(null);
 
   useEffect(() => {
     console.log(fullName);
@@ -85,6 +87,13 @@ export default function Registration() {
           onBlur={() => handleInput('string', 'fullName', fullName)}
           error={errors?.fullName?.error}
           />
+          <RadioGroup 
+          groupName="gender" 
+          selectedValue={selectedValue} 
+          setSelectedValue={setSelectedValue}>
+            <RadioButton label={"Male"} value={"male"} />
+            <RadioButton label={"Female"} value={"female"} />
+          </RadioGroup>
           <CustomInput 
           name={"Email"} 
           onChange={setEmail}
