@@ -30,6 +30,7 @@ export default class Login extends Component {
     this.state = {
       email: "",
       Password: "",
+      errors: {}
     };
   }
 
@@ -41,7 +42,7 @@ export default class Login extends Component {
 componentDidUpdate() {
   console.log({state:this.state});
   
-}
+};
 
 componentDidMount(){
   console.log('mounted');
@@ -49,13 +50,13 @@ componentDidMount(){
 //fetch data from api and database
 //add event listeners or subscriptions
   
-}
+};
 
 componentWillUnmount() {
   console.log('unmounted');
   //for removing event listeners or subscriptions relative to api
   
-}
+};
 
   // const [firstName, setFirstName] = useState('');
   // const [lastName, setLastName] = useState('');
@@ -101,7 +102,40 @@ componentWillUnmount() {
     ToastAndroid.show("User Pressed Button", 5000);
   };
 
-  render() {
+ handleInput = (type, stateName, value) => {
+  this.setState(state => ({
+    ...state,
+    errors: {
+      ...state.errors,
+      [stateName]: this.validateInput(type, value)
+    }
+  }))
+ };
+
+ validateInput = (type, value) => {
+  if(value.trim() === "") return {
+  valid: false,
+  error: 'Input required'
+    }
+    if (type === 'email') {
+      return /\S+\@\S+\.\S+/.test(value) 
+      ? 
+      {valid: true, error: null}
+      : 
+      {valid:false, error: 'Email required'}
+    }
+
+      if(type ==='string') {
+        return /([A-Za-z])+/.test(value) ? {
+          valid:true, error:null
+        } : {
+          valid: false, error: 'Only Use Alphabets For Password)'
+        }
+      }
+    
+ };
+
+ render() {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
@@ -115,8 +149,19 @@ componentWillUnmount() {
         >
           <ScrollView contentContainerStyle={styles.ScrollView}>
             <Text style={styles.title}>Login</Text>
-            <CustomInput name="Email" onChange={(text) => this.setState({email: text})} />
-            <CustomInput name="Password" onChange={(text) => this.setState({password: text})} />
+            <CustomInput 
+            name="Email" 
+            onChange={(text) => this.setState({email: text})}
+            onBlur={ () => this.handleInput('email', 'email', this.state.email)}
+            error={this.state.erros?.email?.error}
+
+            />
+            <CustomInput 
+            name="Password" 
+            onChange={(text) => this.setState({password: text})}
+            onBlur={ () => this.handleInput('string', 'password', this.state.password)}
+            error={this.state.erros?.password?.error}
+            />
             <Pressable style={styles.button}>
               <Text style={styles.buttonText} onPress={this.handlePress}>
                 Login
@@ -141,8 +186,11 @@ componentWillUnmount() {
         </ImageBackground>
       </SafeAreaView>
     );
-  }
+  };
 }
+  
+
+
 
 const styles = StyleSheet.create({
   container: {

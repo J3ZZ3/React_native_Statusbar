@@ -23,7 +23,7 @@ export default function RootLayout() {
   // },[firstName, lastName, email, password, confirmPassword])
 
   return (
-        <Login />
+      <Login />
         // <CounterClass /> 
 
   );
