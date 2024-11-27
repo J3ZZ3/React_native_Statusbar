@@ -17,7 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import * as NavigatorBar from "expo-navigation-bar";
 import CustomInput from "./CustomInput";
-import validateInput from "../utils/InputValid";
+import validateInput from "../utils/inputValid";
 
 export default function Registration() {
   const [fullName, setFullName] = useState("");

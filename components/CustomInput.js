@@ -2,7 +2,10 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 
 const CustomInput = ({name, onChange, error = 'Invalid Input', onBlur}) => {
-
+if( name === "password") {
+  console.log({error, type: typeof error});
+  
+}
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
@@ -13,10 +16,18 @@ const CustomInput = ({name, onChange, error = 'Invalid Input', onBlur}) => {
       onBlur={onBlur}
       />
       {
-        error && (
-          <Text style={styles.error}>Invalid Input</Text>
+        error && typeof error === 'string' && (
+          <Text style={styles.error}>{error}</Text>
         )
       }
+      {
+        error && typeof error === 'object' && error.map((error, index) => {
+          return <Text key={index} style={styles.error}>{error}</Text>
+        }
+
+        )
+      }
+      
     </View>
   )
 }
