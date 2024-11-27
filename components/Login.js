@@ -118,11 +118,10 @@ componentWillUnmount() {
   error: 'Input required'
     }
     if (type === 'email') {
-      return /\S+\@\S+\.\S+/.test(value) 
-      ? 
-      {valid: true, error: null}
-      : 
-      {valid:false, error: 'Email required'}
+      return /\S+\@\S+\.\S+/.test(value) ? {
+        valid: true, error: null
+      }: {
+        valid:false, error: 'Email required'}
     }
 
       if(type ==='string') {
@@ -153,14 +152,14 @@ componentWillUnmount() {
             name="Email" 
             onChange={(text) => this.setState({email: text})}
             onBlur={ () => this.handleInput('email', 'email', this.state.email)}
-            error={this.state.erros?.email?.error}
+            error={this.state.errors?.email?.error}
 
             />
             <CustomInput 
             name="Password" 
             onChange={(text) => this.setState({password: text})}
             onBlur={ () => this.handleInput('string', 'password', this.state.password)}
-            error={this.state.erros?.password?.error}
+            error={this.state.errors?.password?.error}
             />
             <Pressable style={styles.button}>
               <Text style={styles.buttonText} onPress={this.handlePress}>
