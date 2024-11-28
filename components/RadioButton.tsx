@@ -1,11 +1,31 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React, {createContext, useContext} from 'react'
 
-const RadioContext = createContext();
+type RadioButtonProps = {
+    value: string,
+    label: string
+}
+
+type RadioGroupProps = {
+    children: React.ReactNode,
+    groupName: string,
+    selectedValue: string,
+    setSelectedValue: (value: string) => void
+}
+
+type RadioContextType = {
+    selectedValue: string,
+    setSelectedValue: (value: string) => void
+}
+
+const RadioContext = createContext<RadioContextType>({
+    selectedValue: '',
+    setSelectedValue: () => {}
+});
 
 
 
-const RadioButton = ({value, label}) => {
+const RadioButton: React.FC<RadioButtonProps>  = ({value, label}) => {
 
     const {selectedValue, setSelectedValue} = useContext(RadioContext);
 
@@ -31,7 +51,7 @@ const RadioButton = ({value, label}) => {
   )
 }
 
-const RadioGroup = ({children, groupName, selectedValue, setSelectedValue}) => {
+const RadioGroup: React.FC<RadioGroupProps> = ({children, groupName, selectedValue, setSelectedValue}) => {
     return (
         <RadioContext.Provider value={{selectedValue, setSelectedValue}}>
             <Text style={{color: "white",fontSize: 24,fontWeight: "700",marginTop: 20,textAlign: "center",alignItems: "center"}}>{groupName}</Text>
