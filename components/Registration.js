@@ -19,6 +19,7 @@ import * as NavigatorBar from "expo-navigation-bar";
 import CustomInput from "./CustomInput";
 import validateInput from "../utils/inputValid";
 import { RadioButton, RadioGroup } from "./RadioButton";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Registration() {
   const [fullName, setFullName] = useState("");
@@ -42,33 +43,27 @@ export default function Registration() {
     NavigatorBar.setBorderColorAsync("#BDBDBD");
   }, []);
 
-  const handlePress = () => {
-    Alert.alert("Alert", "Button Pressed", [
-      { text: "OK", onPress: () => console.log("OK Pressed") },
-      {
-        text: "Cancel",
-        style: "cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-      {
-        text: "Delete",
-        style: "destructive",
-        onPress: () => console.log("Delete Pressed"),
-      },
-    ]);
-    console.log(alert);
-  };
-
-  const handleLongPress = () => {
-    ToastAndroid.show("User Long Pressed Button", 5000);
-  };
-
   handleInput = (type, stateName, value) => {
     setErrors(errors => ({ 
       ...errors, 
       [stateName]: validateInput(type, value) }));
   }
+
+  const handleOnSubmit = async() => {
+    try {
+      await AsyncStorage.setItem('reg', JSON.stringify({fullName, email, phoneNumber, password}))
+
+    } catch (error) {
+      console.log({er: error});
+      
+    }
+  };
+
+  const handleOnGetData = async() => {
+    const data = JSON.parse(await AsyncStorage.getItem('reg'))
+    console.log({ data });
+    
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -115,12 +110,14 @@ export default function Registration() {
           <Pressable style={styles.button}>
             <Text
               style={styles.buttonText}
-              onPress={handlePress}
-              onLongPress={handleLongPress}
+              onPress={handleOnSubmit()}
             >
               Press Here
             </Text>
           </Pressable>
+          <Pressable style={styles.button} onPress={() => handleOnGetData()}>
+            <Text>Get</Text>
+            </Pressable>
           <StatusBar backgroundColor="#010789" style="light" />
         </ScrollView>
       </ImageBackground>
