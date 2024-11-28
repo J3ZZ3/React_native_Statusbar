@@ -51,7 +51,8 @@ export default function Registration() {
 
   const handleOnSubmit = async() => {
     try {
-      await AsyncStorage.setItem('reg', JSON.stringify({fullName, email, phoneNumber, password}))
+      await AsyncStorage.setItem('reg', JSON.stringify({fullName, email, phoneNumber, password, selectedValue}))
+console.log('Data Submitted');
 
     } catch (error) {
       console.log({er: error});
@@ -110,7 +111,7 @@ export default function Registration() {
           <Pressable style={styles.button}>
             <Text
               style={styles.buttonText}
-              onPress={handleOnSubmit()}
+              onPress={() => handleOnSubmit()}
             >
               Press Here
             </Text>
