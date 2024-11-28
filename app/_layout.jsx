@@ -24,15 +24,12 @@ export default function RootLayout() {
   // },[firstName, lastName, email, password, confirmPassword])
 
   return (
-    <View>
+ 
     <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-  <Stack.Screen name="Register" />
-  <Stack.Screen name="Counter" />
-
-
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
-    </View>
+
+    
   )
 }
 

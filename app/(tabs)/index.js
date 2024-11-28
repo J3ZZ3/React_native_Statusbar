@@ -18,7 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState, Component } from "react";
 import * as NavigatorBar from "expo-navigation-bar";
-import CustomInput from "../components/CustomInput";
+import CustomInput from "../../components/CustomInput";
 import { Link } from "expo-router";
 
 export default class Login extends Component {
