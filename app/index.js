@@ -12,12 +12,14 @@ import {
   Alert,
   ToastAndroid,
   Button,
+  Platform
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState, Component } from "react";
 import * as NavigatorBar from "expo-navigation-bar";
-import CustomInput from "./CustomInput";
+import CustomInput from "../components/CustomInput";
+import { Link } from "expo-router";
 
 export default class Login extends Component {
   constructor() {
@@ -95,11 +97,15 @@ componentWillUnmount() {
   };
 
   handleLongPress = () => {
-    ToastAndroid.show("User Long Pressed Button", 5000);
+    if(Platform.OS === 'android'){
+      ToastAndroid.show("User Long Pressed Button", 5000);
+    }
   };
 
   handleShowAlert = () => {
-    ToastAndroid.show("User Pressed Button", 5000);
+    if(Platform.OS === 'ios'){
+      ToastAndroid.show("User Pressed Button", 5000);
+    }
   };
 
  handleInput = (type, stateName, value) => {
@@ -162,22 +168,17 @@ componentWillUnmount() {
             error={this.state.errors?.password?.error}
             />
             <Pressable style={styles.button}>
-              <Text style={styles.buttonText} onPress={this.handlePress}>
+              <Link href="/" style={styles.buttonText} onPress={this.handlePress}>
                 Login
-              </Text>
+              </Link>
             </Pressable>
             <View>
-              <Text style={styles.SignUp}>Don't have an account?</Text>
+              <Text style={styles.acc}>Don't have an account?</Text>
+          </View>
               <Pressable onPress={this.handleShowAlert}>
-                <Text
-                  style={styles.signUpButton}
-                  onPress={this.handlePress}
-                  onLongPress={this.handleLongPress}
-                >
-                  Signup
-                </Text>
+                <Link href="/Register" style={styles.SignUp}>Sign Up</Link>
               </Pressable>
-            </View>
+            
             <Text style={{color: 'BDBDBD'}}>{this.state.email}</Text>
             <Text style={{color: 'BDBDBD'}}>{this.state.password}</Text>
 
@@ -236,7 +237,17 @@ const styles = StyleSheet.create({
   SignUp: {
     color: "white",
     textAlign: "center",
-    marginTop: 20,
+    borderColor: "#306A68",
+    backgroundColor: "#306A68",
+    marginHorizontal: 150,
+    width: 100,
+    borderRadius: 10,
+    borderWidth: 10
+  },
+  acc: {
+    color: "white",
+    textAlign: "center",
+    marginTop: 20
   },
   signUpButton: {
     color: "#306A68",

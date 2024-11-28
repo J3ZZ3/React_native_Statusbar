@@ -1,11 +1,12 @@
-import Registration from "../components/Registration";
-import Login from "../components/Login";
-import CounterClass from "../components/CounterClass";
-import CustomInput from "../components/CustomInput";
+// import Registration from "../components/Registration";
+// import Login from "../components/Login";
+// import CounterClass from "../components/CounterClass";
+// import CustomInput from "../components/CustomInput";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ImageBackground, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { ScrollView } from "react-native-web";
+import { ScrollView, View } from "react-native-web";
+import { Stack } from "expo-router";
 
 export default function RootLayout() {
 
@@ -23,10 +24,16 @@ export default function RootLayout() {
   // },[firstName, lastName, email, password, confirmPassword])
 
   return (
-      <Registration />
-        // <CounterClass /> 
+    <View>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+  <Stack.Screen name="Register" />
+  <Stack.Screen name="Counter" />
 
-  );
+
+    </Stack>
+    </View>
+  )
 }
 
 // const styles = StyleSheet.create({
