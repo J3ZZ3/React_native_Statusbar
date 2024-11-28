@@ -29,6 +29,8 @@ export default function Registration() {
   const [errors, setErrors] = useState({});
   const [selectedValue, setSelectedValue] = useState(null);
 
+  const [info, setInfo] = useState("");
+
   useEffect(() => {
     console.log(fullName);
     console.log(email);
@@ -63,6 +65,7 @@ console.log('Data Submitted');
   const handleOnGetData = async() => {
     const data = JSON.parse(await AsyncStorage.getItem('reg'))
     console.log({ data });
+    setInfo([data.email, data.fullName, data.phoneNumber, data.password, data.selectedValue]);
     
   };
   return (
@@ -119,6 +122,17 @@ console.log('Data Submitted');
           <Pressable style={styles.button} onPress={() => handleOnGetData()}>
             <Text>Get</Text>
             </Pressable>
+            {
+            info && (
+              <View>
+                <Text>{info[0]}</Text>
+                <Text>{info[1]}</Text>
+                <Text>{info[2]}</Text>
+                <Text>{info[3]}</Text>
+                <Text>{info[4]}</Text>
+              </View>
+            )
+          }
           <StatusBar backgroundColor="#010789" style="light" />
         </ScrollView>
       </ImageBackground>
