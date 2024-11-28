@@ -1,13 +1,13 @@
 const validateInput = (type, value) => {
     if(value.trim() === "") return {
     valid: false,
-    error: 'Input required'
+    error: 'Fill out this field'
       }
       if(type ==='string') {
         return /([A-Za-z])+/.test(value) ? {
           valid:true, error:null
         } : {
-          valid: false, error: 'Only Use Alphabets For Password)'
+          valid: false, error: 'Only Use Alphabets)'
         }
       }
       if (type === 'email') {

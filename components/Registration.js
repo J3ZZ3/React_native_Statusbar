@@ -37,8 +37,10 @@ export default function Registration() {
     console.log(phoneNumber);
     console.log(password);
     console.log(errors);
+    console.log(selectedValue);
     
-  }, [fullName, email, phoneNumber, password, errors]);
+    
+  }, [fullName, email, phoneNumber, password, errors, selectedValue]);
 
   useEffect(() => {
     NavigatorBar.setBackgroundColorAsync("#010789");
@@ -123,15 +125,15 @@ console.log('Data Submitted');
             <Text>Get</Text>
             </Pressable>
             {
-            info && (
-              <View>
-                <Text>{info[0]}</Text>
-                <Text>{info[1]}</Text>
-                <Text>{info[2]}</Text>
-                <Text>{info[3]}</Text>
-                <Text>{info[4]}</Text>
+           
+              <View style={{gap: 10, textTransform: "uppercase", backgroundColor: "grey"}}>
+                <Text>FullName:{info[1]}</Text>
+                <Text>Gender:{info[4]}</Text>
+                <Text>Email:{info[0]}</Text>
+                <Text>PhoneNumber:{info[2]}</Text>
+                <Text>Password:{info[3]}</Text>
               </View>
-            )
+            
           }
           <StatusBar backgroundColor="#010789" style="light" />
         </ScrollView>

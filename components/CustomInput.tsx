@@ -1,15 +1,21 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TextInputProps } from 'react-native'
 import React from 'react'
 
-const CustomInput = ({name, onChange, error = 'Invalid Input', onBlur}) => {
+type CustomInputProps = TextInputProps & {
+  name: string,
+  error: string | Array<string>,
+  onChange: (value: string) => void
+}
+
+const CustomInput: React.FC<CustomInputProps> = ({name, onChange, error , onBlur}) => {
 if( name === "password") {
   console.log({error, type: typeof error});
   
 }
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{name}</Text>
-      <TextInput style={[styles.input, error && {borderColor: '#89382C'}]} 
+    <View>
+      <Text style={styles.title} >{name}</Text>
+      <TextInput style={[styles.input]} 
       placeholder={name} 
       placeholderTextColor={'#717171'}
       onChangeText={(text) => {onChange(text)}}
@@ -21,7 +27,7 @@ if( name === "password") {
         )
       }
       {
-        error && typeof error === 'object' && error.map((error, index) => {
+        error && typeof error === 'object' && error.map((error: string, index: number) => {
           return <Text key={index} style={styles.error}>{error}</Text>
         }
 
